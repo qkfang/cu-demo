@@ -63,17 +63,7 @@ jupyter notebook
 
 ### Using the Python Function
 
-The core function `process_file_with_content_understanding(file_path)` can be used in your own scripts:
-
-```python
-from azure_content_understanding_demo import process_file_with_content_understanding
-
-# Process a file
-result = process_file_with_content_understanding("path/to/your/file.pdf")
-
-# Access the JSON response
-print(result)
-```
+The core function `process_file_with_content_understanding(file_path)` is defined in the Jupyter notebook. To use it in your own scripts, you can copy the function definition from the notebook into a standalone Python file, or run it directly within the notebook environment.
 
 ## Project Structure
 

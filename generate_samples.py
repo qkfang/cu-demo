@@ -77,12 +77,30 @@ def create_sample_images():
     # Draw border
     draw1.rectangle([(10, 10), (590, 340)], outline='black', width=2)
     
-    # Add text
+    # Add text - Try multiple font paths for cross-platform compatibility
+    font_paths = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+        "/System/Library/Fonts/Helvetica.ttc",  # macOS
+        "C:\\Windows\\Fonts\\Arial.ttf",  # Windows
+    ]
+    
     try:
-        # Try to use a default font, fallback to basic if not available
-        font_large = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
-        font_medium = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 18)
-        font_small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
+        # Try to load fonts from different paths
+        font_large = None
+        for font_path in font_paths:
+            try:
+                font_large = ImageFont.truetype(font_path, 24)
+                font_medium = ImageFont.truetype(font_path, 18)
+                font_small = ImageFont.truetype(font_path, 14)
+                break
+            except:
+                continue
+        
+        # If no TrueType font found, use default
+        if font_large is None:
+            font_large = ImageFont.load_default()
+            font_medium = ImageFont.load_default()
+            font_small = ImageFont.load_default()
     except:
         font_large = ImageFont.load_default()
         font_medium = ImageFont.load_default()
